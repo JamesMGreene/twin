@@ -1,0 +1,180 @@
+#summary How to do some common things with WinDriver
+#labels Featured
+
+Here are some things you might like to do with !WinDriver. They're arranged (approximately) from most common to most obscure. 
+
+= Write "hello world" =
+  # Extract the windriver RC package
+  # Run sharpclaws.exe
+  # Create a new Java project
+  # Add the windriver-client library to your project
+  # `import org.ebayopensource.webdriver.*;`
+  # Write the following main method:
+{{{
+Application app = new Application(new URL("http://localhost:4444"));
+app.open("notepad", null);
+try {
+    Window mainWindow = app.getWindow();
+    mainWindow.type("Hello world!");
+} finally {
+    app.close();
+}
+}}}
+
+= Add a new application to automate =
+  # In your RC directory, open *sharpclaws.xml* in a text editor.
+  # Add the name and path of your application
+{{{
+<param name="app.calc.name">Windows Calculator</param>
+<param name="app.calc.path">C:\Windows\system32\calc.exe</param>
+}}}
+  # Restart sharpclaws.exe
+  # Refer to the application by its name: *Windows Calculator*, from your tests.
+
+= Locate elements inside your application =
+
+  # Get an overview of your element tree using UiSpy (Windows SDK tools) or the WinDriverIDE.
+[http://windriver.googlecode.com/svn/wiki/images/uispy.png]
+  # Choose your search root (desktop, main window, another element)
+{{{
+Window root = app.getWindow();
+}}}
+  # `import static com.ebay.spine.windriver.Criteria.*`
+  # Use the get descendants/children methods with appropriate [Criteria].
+{{{
+Window dialog = root.getChild(type(Window.class))
+Button button = dialog.getDescendant(type(Button.class).and(id("2"))); 
+}}}
+
+= Interact with elements =
+
+  # Some actions are valid for all elements
+{{{
+Element myElement;
+myElement.click();
+Dimension d = myElement.getSize();
+myElement.type("Text\n");
+myElement.sendKeys("{ESC}");
+}}}
+
+  # Some actions are valid for particular [ControlType]s
+{{{
+Window myWindow = (Window)myElement;
+myWindow.setSize(100, 200);
+myWindow.close();
+}}}
+
+  # Some actions are valid for particular [ControlPattern]s
+{{{
+if(myElement.hasControlPattern(Expandable.class))
+    ((Expandable)myElement).setExpanded(true);
+((Toggle)myElement).toggle();
+}}}
+
+= Take a screenshot =
+
+  # Define the element to capture
+{{{
+Element myElement;
+}}}
+  # Capture the screenshot
+{{{
+Screenshot screenshot1 = myElement.getScreenshot();  
+}}}
+  # Do something with it
+{{{
+// Save to disk
+File target = screenshot1.saveIn(new File("C:/"));
+System.out.println("Saved as "+target); // e.g. C:/1234-12345678.png
+}}}
+
+= Run tests using TestNG =
+  # Create an annotation that will configure your test methods
+{{{
+public @interface WinDriverTest {
+    String application();
+    String version() default null;
+}
+}}}
+  # Create a class implementing IInvokedMethodListener
+{{{
+public class WinDriverListener implements IInvokedMethodListener { }
+}}}
+  # Add a thread-local static field to hold the current Application
+{{{
+public static ThreadLocal<Application> currentApp = new ThreadLocal<Application>();
+}}}
+  # In *beforeInvocation*, create the Application object and store it in *app*
+{{{
+public void beforeInvocation(IInvokedMethod meth, ITestResult result) {
+    WinDriverTest ann = meth.getTestMethod().getMethod().getAnnotation(WinDriverTest.class);
+    if(ann != null) {
+        Application app = new Application(new URL("http://localhost:4444"));
+        app.open(ann.application(), ann.version());
+        currentApp.set(app);
+    }
+}
+}}}
+  # In *afterInvocation*, close the Application object
+{{{
+public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
+    Application app = currentApp.get();
+    currentApp.set(null);
+    if(app != null)
+        app.close();
+}
+}}}
+  # Add the listener to your test class
+{{{
+@Listeners({WinDriverTest.class})
+public class TestNotepad { ... }
+}}}
+  # Annotate your tests
+{{{
+@Test @WinDriverTest("notepad", null) 
+public void test() { ... } 
+}}}
+  # Within your tests, access the application through the listener
+{{{
+Application app = WinDriverListener.currentApp.get();
+}}}
+
+= Open a file in the target application =
+  # Open the 'File Open' dialog, locate the filename field
+{{{
+app.getWindow().menu("File").openMenu().item("Open...").click();
+Window dialog = app.getWindow().getChild(Criteria.type(Window.class));
+Edit filenameField = dialog.getDescendant(Criteria.type(Edit.class));
+}}}
+  # Upload the file to the RC
+{{{
+Attachment att = app.upload(new File("C:/local/file.txt"));
+String remotePath = att.getFile(); // e.g. "C:/temp/12345.txt"
+}}}
+  # Refer to it by its remote path
+{{{
+filenameField.type(remotePath);
+dialog.button("Open").click();
+}}}
+
+= Attach to a long-running application =
+  # Configure the application in sharpclaws.xml as normal
+  # Set the 'launch-strategy' capability to 'attach'
+{{{
+<param name="app.myapp.launch-strategy">attach</param>
+}}}
+
+= Change configuration files before the app is launched =
+  # Enable file-based session setup for your app, by editing sharpclaws.xml
+{{{
+<param name="app.myapp.sessionSetup.files">true</param>
+}}}
+  # After you create your Application object but before you call *open()*, add a session setup parameter
+{{{
+Application app = new Application("http://localhost:4444/");
+HashMap<String,Object> myFile = new HashMap<String,Object>();
+myFile.put("path", "C:\\file.txt"); // remote file to overwrite
+String contents = base64(data); // Base64 encode using Apache commons codec or similar
+myFile.put("data", contents);
+app.addSessionSetup(Arrays.asList(myFile), true); // require it to be supported
+}}}
