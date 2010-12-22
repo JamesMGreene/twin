@@ -1,4 +1,5 @@
 #summary The structure representing the target application's UI
+#labels Featured
 
 The graphical components of an application are exposed to you as a tree of *elements*.
 
