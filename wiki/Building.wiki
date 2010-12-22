@@ -1,6 +1,6 @@
-#summary Requirements and procedure to build WinDriver
+#summary Requirements and procedure to build Twin
 
-!WinDriver uses [http://maven.apache.org/ Maven] as a build system. It consists of a hierarchy of Maven projects, and when you're set up correctly a single `mvn package` will build them all. 
+Twin uses [http://maven.apache.org/ Maven] as a build system. It consists of a hierarchy of Maven projects, and when you're set up correctly a single `mvn package` will build them all. 
 
 This page will tell you what you need to get to that point.
 
@@ -8,9 +8,9 @@ This page will tell you what you need to get to that point.
 
 The most important subprojects are:
 
-   * *windriver/client/java* - the Java client library for accessing !WinDriver
-   * *windriver/ide* - the graphical tool for exploring !WinDriver. This uses the Java client library.
-   * *windriver/rc* - the !WinDriver Remote Control (server). The RC includes a copy of the IDE, so that you can use it as an applet in your browser.
+   * *twin/client/java* - the Java client library for accessing Twin
+   * *twin/ide* - the graphical tool for exploring Twin. This uses the Java client library.
+   * *twin/rc* - the Twin Remote Control (server). The RC includes a copy of the IDE, so that you can use it as an applet in your browser.
 
 = Requirements =
 
@@ -31,10 +31,10 @@ The RC (and its other supporting components) are written in .NET and use Windows
    # From the checked-out directory, run `mvn install` (not `mvn package`, because of [http://jira.codehaus.org/browse/MDEP-291 this bug]).
    # The RC zip is found in packages/rc/target/
    # The Java client JAR is found in packages/client/java/target/
-   # The IDE JAR is found in windriver/ide/target/
+   # The IDE JAR is found in twin/ide/target/
 
 = Troubleshooting =
 
-Here are the most common problems building !WinDriver:
+Here are the most common problems building Twin:
 
 _None yet. Please add a comment if you run into issues!_

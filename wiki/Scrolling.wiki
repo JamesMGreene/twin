@@ -1,6 +1,6 @@
-#summary WinDriver provides a different scrolling model to try to ensure consistency.
+#summary Twin provides a different scrolling model to try to ensure consistency.
 
-In most cases, !WinDriver exposes the behaviour of UiAutomation fairly directly, without too much 'wrapping'. However for scrolling elements, the tools UIAutomation provides seem unsatisfactory:
+In most cases, Twin exposes the behaviour of UiAutomation fairly directly, without too much 'wrapping'. However for scrolling elements, the tools UIAutomation provides seem unsatisfactory:
    * There are two mechanisms - !ScrollBar controls and the Scroll pattern. Neither is universally available.
    * There are cases where UIAutomation doesn't recognise the scroll bars at all, and we need Win32 calls.
 

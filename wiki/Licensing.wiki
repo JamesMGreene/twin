@@ -1,6 +1,6 @@
 #summary Authorship and Licensing information
 
-!WinDriver was originally developed at eBay Europe for testing Windows software such as [http://pages.ebay.com/turbo_lister/ Turbo Lister] and the [http://pages.ebay.com/Excel_Plugin/ Excel Plug-in for eBay].
+Twin was originally developed at eBay Europe for testing Windows software such as [http://pages.ebay.com/turbo_lister/ Turbo Lister] and the [http://pages.ebay.com/Excel_Plugin/ Excel Plug-in for eBay].
 
 It is now an open-source project and is available under the permissive [http://www.apache.org/licenses/LICENSE-2.0.html Apache License].
 
@@ -12,7 +12,7 @@ It is now an open-source project and is available under the permissive [http://w
 = License =
 
 <pre>
-    Copyright 2010 eBay Inc., !WinDriver authors, and other contributors.
+    Copyright 2010 eBay Inc., Twin authors, and other contributors.
 
      Licensed under the Apache License, Version 2.0 (the "License"); 
     you may not use the files contained in this project except

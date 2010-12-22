@@ -2,7 +2,7 @@
 
 == Where's the code? ==
 
-!WinDriver was initially developed as an internal project at eBay. To release the code written in this period, it needs to be reviewed by our Legal department to make sure it doesn't have company secrets in it. 
+Twin was initially developed as an internal project at eBay. To release the code written in this period, it needs to be reviewed by our Legal department to make sure it doesn't have company secrets in it. 
 
 == When will it be released? ==
 

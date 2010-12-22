@@ -1,13 +1,13 @@
-#summary How to do some common things with WinDriver
+#summary How to do some common things with Twin
 #labels Featured
 
-Here are some things you might like to do with !WinDriver. They're arranged (approximately) from most common to most obscure. 
+Here are some things you might like to do with Twin. They're arranged (approximately) from most common to most obscure. 
 
 = Write "hello world" =
-  # Extract the windriver RC package
+  # Extract the twin RC package
   # Run sharpclaws.exe
   # Create a new Java project
-  # Add the windriver-client library to your project
+  # Add the twin-client library to your project
   # `import org.ebayopensource.webdriver.*;`
   # Write the following main method:
 {{{
@@ -33,13 +33,13 @@ try {
 
 = Locate elements inside your application =
 
-  # Get an overview of your element tree using UiSpy (Windows SDK tools) or the WinDriverIDE.
-[http://windriver.googlecode.com/svn/wiki/images/uispy.png]
+  # Get an overview of your element tree using UiSpy (Windows SDK tools) or the TwinIDE.
+[http://twin.googlecode.com/svn/wiki/images/uispy.png]
   # Choose your search root (desktop, main window, another element)
 {{{
 Window root = app.getWindow();
 }}}
-  # `import static com.ebay.spine.windriver.Criteria.*`
+  # `import static com.ebay.spine.twin.Criteria.*`
   # Use the get descendants/children methods with appropriate [Criteria].
 {{{
 Window dialog = root.getChild(type(Window.class))
@@ -91,14 +91,14 @@ System.out.println("Saved as "+target); // e.g. C:/1234-12345678.png
 = Run tests using TestNG =
   # Create an annotation that will configure your test methods
 {{{
-public @interface WinDriverTest {
+public @interface TwinTest {
     String application();
     String version() default null;
 }
 }}}
   # Create a class implementing IInvokedMethodListener
 {{{
-public class WinDriverListener implements IInvokedMethodListener { }
+public class TwinListener implements IInvokedMethodListener { }
 }}}
   # Add a thread-local static field to hold the current Application
 {{{
@@ -107,7 +107,7 @@ public static ThreadLocal<Application> currentApp = new ThreadLocal<Application>
   # In *beforeInvocation*, create the Application object and store it in *app*
 {{{
 public void beforeInvocation(IInvokedMethod meth, ITestResult result) {
-    WinDriverTest ann = meth.getTestMethod().getMethod().getAnnotation(WinDriverTest.class);
+    TwinTest ann = meth.getTestMethod().getMethod().getAnnotation(TwinTest.class);
     if(ann != null) {
         Application app = new Application(new URL("http://localhost:4444"));
         app.open(ann.application(), ann.version());
@@ -126,17 +126,17 @@ public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 }}}
   # Add the listener to your test class
 {{{
-@Listeners({WinDriverTest.class})
+@Listeners({TwinTest.class})
 public class TestNotepad { ... }
 }}}
   # Annotate your tests
 {{{
-@Test @WinDriverTest("notepad", null) 
+@Test @TwinTest("notepad", null) 
 public void test() { ... } 
 }}}
   # Within your tests, access the application through the listener
 {{{
-Application app = WinDriverListener.currentApp.get();
+Application app = TwinListener.currentApp.get();
 }}}
 
 = Open a file in the target application =
