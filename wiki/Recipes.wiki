@@ -39,7 +39,7 @@ try {
 {{{
 Window root = app.getWindow();
 }}}
-  # `import static com.ebay.spine.twin.Criteria.*`
+  # `import static org.ebayopensource.twin.Criteria.*`
   # Use the get descendants/children methods with appropriate [Criteria].
 {{{
 Window dialog = root.getChild(type(Window.class))

@@ -31,7 +31,7 @@ for(Element e : topLevelChildren())
 Retrieving all children is cumbersome and inefficient, so getChildren() can take a parameter specifying [Criteria search criteria]. 
 
 {{{
-import static com.ebay.spine.twin.Criteria.*;
+import static org.ebayopensource.twin.Criteria.*;
 List<Element> newDocuments = desktop.getChildren(name("Untitled"));
 }}}
 
