@@ -1,0 +1,7 @@
+#summary The old code-name of the project
+
+Twin used to be known internally as !WinDriver, by analogy with [http://code.google.com/p/webdriver WebDriver] (now merged with [http://www.seleniumhq.org Selenium]).
+
+It conflicted with (among others) [http://www.windriver.com/ Wind River] so we changed it before the public release.
+
+So if eBay people mention the name, it's a slip of the tongue and refers to Twin.
