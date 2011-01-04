@@ -55,7 +55,7 @@ so replace `instanceof` with `.is()` and casting with `.as()`
 
 === Yeah, this is ugly ===
 
-This isn't how you expect Java types to behave. The alternative is to strip down the ControlType interfaces, and not have them inherit any ControlPatterns. This would mean:
+This isn't how you expect Java types to behave. The alternative is to strip down the ControlType interfaces, and not have them inherit any !ControlPatterns. This would mean:
 
   * You use `x instanceof Expandable` instead of `x.is(Expandable.class)`
   * You use `(Expandable)x` instead of `x.as(Expandable.class)`
