@@ -64,10 +64,10 @@ Your automation code is simply a java application (or JUnit test, etc) that uses
 {{{
 Application app = new Application(new URL("http://server:4444/")); // URL of the remote control
 app.open("notepad", null); // launch app configured as 'notepad' on remote control, any version
-    Window window = app.getWindow();
-    window.type("Hello world!");
-    window.getScreenshot().save(new File("C:/notepad.png"));
-    app.close();
+Window window = app.getWindow();
+window.type("Hello world!");
+window.getScreenshot().save(new File("C:/notepad.png"));
+app.close();
 }}}
 
 The diagram shows the app.getWindow() call, which locates the application's main window (waiting up to 30 seconds for it to appear).
