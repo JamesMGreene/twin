@@ -7,7 +7,7 @@
 
 Make sure you have .NET framework installed ( version  3.0 or above ) [http://www.microsoft.com/net/download.aspx .NET framework download]
 
-Download TWIN remote control, unzip on the machine when your AUT is installed..
+Download TWIN remote control : twin-1.0.zip [http://code.google.com/p/twin/downloads/list here], unzip on the machine when your AUT is installed..
 
 If you're using windows 7, you may have to unblock the files first. Right click on each file, properties. In the general tab, click the Unblock button at the bottom.
 
@@ -24,7 +24,7 @@ To add more application, update sharpclaws.xml, and add your application name an
 
 Now that the server is running, you can now create your first test. The only langage completed to pilot the TWIN server is java. .NET is coming soon.
 
-Download twin-client-standalone-1.0.jar
+Download twin-client-standalone-1.0.jar [http://code.google.com/p/twin/downloads/list here]
 Start a new java project and add the jar to the project classpath.
 Create a new class with a main ( updatin the URL you pass as a parameter to the application to match the IP of the machine where sharpclaws.exe has been launched ):
 
