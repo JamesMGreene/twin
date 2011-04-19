@@ -159,6 +159,10 @@
       <Project>{825451EB-5EE5-4EA5-AED3-524148BE2252}</Project>
       <Name>API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\sharpclaws\server\Server.csproj">
+      <Project>{D30340A2-9B39-48D9-845F-FFBD42DFB985}</Project>
+      <Name>Server</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
