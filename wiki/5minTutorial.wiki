@@ -5,7 +5,7 @@
 
 = Setting up the server = 
 
-Install the last version of the .NET framework. [http://www.microsoft.com/net/download.aspx link]
+Make sure you have .NET framework installed ( version  3.0 or above ) [http://www.microsoft.com/net/download.aspx .NET framework download]
 
 Download TWIN remote control, unzip on the machine when your AUT is installed..
 
