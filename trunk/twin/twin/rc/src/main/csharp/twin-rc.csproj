@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD1F2C7B-C3E7-41E2-A864-133B78B26300}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>twin-rc</AssemblyName>
+    <RootNamespace>Twin</RootNamespace>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\tunah\AppData\Roaming\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <PublishUrl>http://localhost/twin-rc/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\target\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\target\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutomationExtensions.cs" />
+    <Compile Include="Generic\Responders.cs" />
+    <Compile Include="STAHelper.cs" />
+    <Compile Include="FileRef.cs" />
+    <Compile Include="Grid\GridHub.cs" />
+    <Compile Include="Model\Attachment.cs" />
+    <Compile Include="Model\Clipboard.cs" />
+    <Compile Include="Model\Desktop.cs" />
+    <Compile Include="Model\Element.cs" />
+    <Compile Include="Model\NativeElement.cs" />
+    <Compile Include="Model\ScrollAxis.cs" />
+    <Compile Include="Model\SessionSetup.cs" />
+    <Compile Include="NameMappings.cs" />
+    <Compile Include="Proxy\IJSONProperties.cs" />
+    <Compile Include="View\Attachments.cs" />
+    <Compile Include="View\Clipboards.cs" />
+    <Compile Include="View\Elements.cs" />
+    <Compile Include="View\Search.cs" />
+    <Compile Include="View\Dump.cs" />
+    <Compile Include="TwinException.cs" />
+    <Compile Include="Generic\IJSONable.cs" />
+    <Compile Include="Generic\JasonServlet.cs" />
+    <Compile Include="Generic\JSON.cs" />
+    <Compile Include="Generic\Routes.cs" />
+    <Compile Include="Model\SessionFactory.cs" />
+    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\ResponseStatus.cs" />
+    <Compile Include="Model\Session.cs" />
+    <Compile Include="Proxy\PersistedObject.cs" />
+    <Compile Include="View\Sessions.cs" />
+    <Compile Include="TwinRC.cs" />
+    <EmbeddedResource Include="..\resources\index.html">
+      <Link>index.html</Link>
+      <LogicalName>twin-rc.index.html</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\resources\ide.html">
+      <Link>ide.html</Link>
+      <LogicalName>twin-rc.ide.html</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\..\ide\target\twin-ide-1.0-SNAPSHOT.jar">
+      <Link>twin-ide-1.0-SNAPSHOT.jar</Link>
+      <LogicalName>twin-rc.twin-ide.jar</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\dotnet-logging\dotnet-logging.csproj">
+      <Project>{03F44702-ADF8-48C0-A313-64427710C71C}</Project>
+      <Name>dotnet-logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\sharpclaws\api\API.csproj">
+      <Project>{825451EB-5EE5-4EA5-AED3-524148BE2252}</Project>
+      <Name>API</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

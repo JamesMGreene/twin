@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+        <groupId>org.ebayopensource.twin</groupId>
+  	<artifactId>dotnet-project</artifactId>
+  	<version>1.0-SNAPSHOT</version>
+  </parent>  
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.ebayopensource.twin</groupId>
+  <artifactId>sharpclaws-server</artifactId>
+  <version>1.0.0.0-SNAPSHOT</version>
+  <name>sharpclaws-server</name>
+  <description>Simple .NET application server</description>
+  <packaging>dotnet-executable</packaging>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.ebayopensource.twin</groupId>
+  		<artifactId>sharpclaws-api</artifactId>
+  		<version>1.0.0.0-SNAPSHOT</version>
+  		<type>dotnet-library</type>
+  	</dependency>
+  	<dependency>
+                <groupId>org.ebayopensource.twin</groupId>
+  		<artifactId>dotnet-logging</artifactId>
+  		<version>1.0.0.0-SNAPSHOT</version>
+  		<type>dotnet-library</type>
+  	</dependency>
+  </dependencies>
+  
+  <build>
+  <plugins>
+	<plugin>
+		<!-- add the icon. this is meant to happen automatically (in src/main/resources/win32icon), but it doesn't. -->
+		<groupId>npanday.plugin</groupId>
+		<artifactId>maven-compile-plugin</artifactId>
+		<configuration>
+			<parameters>
+				<parameter>/win32icon:${basedir}\src\main\win32icon\icon.ico</parameter>
+			</parameters>
+		</configuration>
+	</plugin>
+  </plugins>
+  </build>
+</project>

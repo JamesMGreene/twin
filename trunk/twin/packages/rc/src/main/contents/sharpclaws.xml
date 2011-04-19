@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+<server> defines an HTTP server.
+	port (80): numbered port to listen on
+	log-level (INFO): log severity level (ERROR/INFO/DEBUG/TRACE)
+	log (none): log file (stdout if none is specified)
+-->
+
+<server port="4444" log-level="INFO"> 
+
+	<!--
+	<servlet> defines a web application running inside the server
+		context (/): the root path of the servlet, relative to the server
+		class: the subclass of Servlet to instantiate
+		assembly: the DLL to load that contains the specified servlet class
+	-->
+
+	<servlet context="/" class="Twin.TwinRC" assembly="twin-rc.dll">
+		<!--
+		<param> defines a parameter to be passed to the the servlet through its configuration property
+			name: the parameter name
+			content: the parameter value
+
+		Recognized parameters for Twin RC:
+			app.{IDENTIFIER}.path - the path to application IDENTIFIER
+			app.{IDENTIFIER}.name - the exposed name of application IDENTIFIER 
+				(if not given, IDENTIFIER is used as the name)
+		-->
+		<param name="app.notepad.path">C:\windows\notepad.exe</param>
+		<param name="app.paint.name">Microsoft Paint</param>
+		<param name="app.paint.path">C:\WINDOWS\system32\mspaint.exe</param>
+	</servlet>
+</server>

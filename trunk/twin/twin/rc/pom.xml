@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+        <groupId>org.ebayopensource.twin</groupId>
+  	<artifactId>dotnet-project</artifactId>
+  	<version>1.0-SNAPSHOT</version>
+  </parent>  
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.ebayopensource.twin</groupId>
+  <artifactId>twin-rc</artifactId>
+  <version>1.0.0.0-SNAPSHOT</version>
+  <name>twin-rc</name>
+  <description>Servlet providing Twin RC</description>
+  <packaging>dotnet-library</packaging>
+  
+  <build>
+	<plugins>
+		<plugin>
+			<artifactId>maven-dependency-plugin</artifactId>
+			<version>2.1</version>
+			
+			<configuration>
+				<artifactItems>
+					<artifactItem>
+						<groupId>org.ebayopensource.twin</groupId>
+						<artifactId>twin-ide</artifactId>
+						<version>1.0-SNAPSHOT</version>
+					</artifactItem>
+				</artifactItems>
+				<stripVersion>true</stripVersion>
+				<outputDirectory>${project.build.directory}/assembly-resources/resource</outputDirectory>
+			</configuration>
+			
+			<executions>
+				<execution>
+					<id>include-ide</id>
+					<goals><goal>copy</goal></goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+  </build>
+  
+  <dependencies>
+	<dependency>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-dependency-plugin</artifactId>
+		<version>2.0</version>
+	</dependency>
+	<dependency>
+		<!-- we embed the IDE as an applet -->
+		<groupId>org.ebayopensource.twin</groupId>
+		<artifactId>twin-ide</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</dependency>
+  	<dependency>
+                <groupId>org.ebayopensource.twin</groupId>
+  		<artifactId>sharpclaws-api</artifactId>
+  		<version>1.0.0.0-SNAPSHOT</version>
+  		<type>dotnet-library</type>
+  	</dependency>
+  	<dependency>
+                <groupId>org.ebayopensource.twin</groupId>
+  		<artifactId>dotnet-logging</artifactId>
+  		<version>1.0.0.0-SNAPSHOT</version>
+  		<type>dotnet-library</type>
+  	</dependency>
+	<dependency>
+		<groupId>com.microsoft.net</groupId>
+		<artifactId>UIAutomationClient</artifactId>
+		<version>3.0.0.0</version>
+		<classifier>31bf3856ad364e35</classifier>
+		<type>gac_msil</type>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.microsoft.net</groupId>
+		<artifactId>UIAutomationTypes</artifactId>
+		<version>3.0.0.0</version>
+		<classifier>31bf3856ad364e35</classifier>
+		<type>gac_msil</type>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.microsoft.net</groupId>
+		<artifactId>PresentationCore</artifactId>
+		<version>3.0.0.0</version>
+		<classifier>31bf3856ad364e35</classifier>
+		<type>gac_32</type>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.microsoft.net</groupId>
+		<artifactId>WindowsBase</artifactId>
+		<version>3.0.0.0</version>
+		<classifier>31bf3856ad364e35</classifier>
+		<type>gac_msil</type>
+		<scope>provided</scope>
+	</dependency>
+  </dependencies>
+</project>
