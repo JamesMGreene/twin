@@ -29,9 +29,8 @@ The RC (and its other supporting components) are written in .NET and use Windows
 
    # Check out the code
    # From the checked-out directory, run `mvn install` (not `mvn package`, because of [http://jira.codehaus.org/browse/MDEP-291 this bug]).
-   # The RC zip is found in packages/rc/target/
-   # The Java client JAR is found in packages/client/java/target/
-   # The IDE JAR is found in twin/ide/target/
+   # open the twin.sln solution with visual studio 
+   # build the solution.The output is in twin\twin\rc\target\Debug ( you need a sharpclaws.xml specified in the same location to start testing an application )
 
 = Troubleshooting =
 
