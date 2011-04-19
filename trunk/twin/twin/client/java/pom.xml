@@ -3,22 +3,22 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-                <groupId>org.ebayopensource.twin</groupId>
+		<groupId>org.ebayopensource.twin</groupId>
 		<artifactId>java-project</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 
-    <groupId>org.ebayopensource.twin</groupId>
+	<groupId>org.ebayopensource.twin</groupId>
 	<artifactId>twin-java-client</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>twin-java-client</name>
 	<description>Java client for Twin.</description>
-	
+
 	<dependencies>
 		<dependency>
-                        <groupId>org.ebayopensource.twin</groupId>
+			<groupId>org.ebayopensource.twin</groupId>
 			<artifactId>json</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
