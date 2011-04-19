@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twin RC</title>
+		
+		<script type="text/javascript">
+/* json2.js */
+if(!this.JSON){JSON=function(){function f(n){return n<10?'0'+n:n;}
+Date.prototype.toJSON=function(){return this.getUTCFullYear()+'-'+
+f(this.getUTCMonth()+1)+'-'+
+f(this.getUTCDate())+'T'+
+f(this.getUTCHours())+':'+
+f(this.getUTCMinutes())+':'+
+f(this.getUTCSeconds())+'Z';};var m={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'};function stringify(value,whitelist){var a,i,k,l,r=/["\\\x00-\x1f\x7f-\x9f]/g,v;switch(typeof value){case'string':return r.test(value)?'"'+value.replace(r,function(a){var c=m[a];if(c){return c;}
+c=a.charCodeAt();return'\\u00'+Math.floor(c/16).toString(16)+
+(c%16).toString(16);})+'"':'"'+value+'"';case'number':return isFinite(value)?String(value):'null';case'boolean':case'null':return String(value);case'object':if(!value){return'null';}
+if(typeof value.toJSON==='function'){return stringify(value.toJSON());}
+a=[];if(typeof value.length==='number'&&!(value.propertyIsEnumerable('length'))){l=value.length;for(i=0;i<l;i+=1){a.push(stringify(value[i],whitelist)||'null');}
+return'['+a.join(',')+']';}
+if(whitelist){l=whitelist.length;for(i=0;i<l;i+=1){k=whitelist[i];if(typeof k==='string'){v=stringify(value[k],whitelist);if(v){a.push(stringify(k)+':'+v);}}}}else{for(k in value){if(typeof k==='string'){v=stringify(value[k],whitelist);if(v){a.push(stringify(k)+':'+v);}}}}
+return'{'+a.join(',')+'}';}}
+return{stringify:stringify,parse:function(text,filter){var j;function walk(k,v){var i,n;if(v&&typeof v==='object'){for(i in v){if(Object.prototype.hasOwnProperty.apply(v,[i])){n=walk(i,v[i]);if(n!==undefined){v[i]=n;}}}}
+return filter(k,v);}
+if(/^[\],:{}\s]*$/.test(text.replace(/\\./g,'@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,']').replace(/(?:^|:|,)(?:\s*\[)+/g,''))){j=eval('('+text+')');return typeof filter==='function'?walk('',j):j;}
+throw new SyntaxError('parseJSON');}};}();}
+		
+if (typeof XMLHttpRequest == "undefined") {
+  XMLHttpRequest = function () {
+    try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); }
+      catch (e) {}
+    try { return new ActiveXObject("Msxml2.XMLHTTP.3.0"); }
+      catch (e) {}
+    throw new Error("This browser does not support XMLHttpRequest.");
+  };
+}
+
+if (!Array.prototype.forEach) {
+  Array.prototype.forEach = function(fun /*, thisp*/) {
+    "use strict";
+    if (this === void 0 || this === null)
+      throw new TypeError();
+    var t = Object(this);
+    var len = t.length >>> 0;
+    if (typeof fun !== "function")
+      throw new TypeError();
+    var thisp = arguments[1];
+    for (var i = 0; i < len; i++) {
+      if (i in t)
+        fun.call(thisp, t[i], i, t);
+    }
+  };
+}
+		
+			function update(evt) {
+				if(evt == 'pageshow') {
+					// skip the first time pageshow is called, as load will be called too
+					if(document.pageShowWasCalled == null) {
+						document.pageShowWasCalled = true;
+						return;
+					}
+				}
+					
+				var req = new XMLHttpRequest();
+				req.open("GET", "status", true);
+				var timeout = setTimeout(function() {
+					handleError("Timeout");
+					req.abort();
+				}, 5000);
+				req.onreadystatechange = function() {
+					if(req.readyState != 4) 
+						return;
+					clearTimeout(timeout);
+					if(req.status != 200)
+						return handleError("Status: "+req.status);
+					handleUpdate(JSON.parse(req.responseText));
+				}
+				req.send(null);
+			}
+			function clear(id) {
+				var elt = document.getElementById(id);
+				while(elt.hasChildNodes())
+					elt.removeChild(elt.lastChild);				
+			}
+			function set(id, value) {
+				clear(id);
+				document.getElementById(id).appendChild(document.createTextNode(value));
+			}
+			function addRow(eltid, values) {
+				var tr = document.createElement("tr");
+				values.forEach(function(value) {
+					var td = document.createElement("td");
+					
+					if(typeof(value) == 'string')
+						td.appendChild(document.createTextNode(value));
+					else if(typeof(value) == 'array') {
+						var ul = document.createElement("ul");
+						value.forEach(function(v) {
+							var li = document.createElement("li");
+							li.appendChild(document.createTextNode(v));
+							ul.appendChild(li);
+						});
+						td.appendChild(ul);
+					} else if(typeof(value) == 'object') {
+						var ul = document.createElement("ul");						
+						for(var k in value) {
+							var li = document.createElement("li");
+							li.appendChild(document.createTextNode(k));
+							li.appendChild(document.createTextNode(" = "));
+							li.appendChild(document.createTextNode(value[k]));
+							ul.appendChild(li);						
+						}
+						td.appendChild(ul);
+					} else if(typeof(value) == 'function') {
+						value(td);
+					}
+
+					tr.appendChild(td);
+				});
+								
+				var elt = document.getElementById(eltid);
+				if(elt.lastChild != null && elt.lastChild.className.indexOf("alternate") < 0)
+					tr.className = "alternate";
+					
+				elt.appendChild(tr);
+			}
+			function handleUpdate(obj) {
+				set("server.name", obj.server.name);
+				set("server.version", obj.server.version);
+				
+				clear("configurations");
+				obj.configurations.forEach(function(config) {
+					var id = config.id;
+					var caps = config.capabilities;
+					delete config.id;
+					delete config.capabilities;
+					addRow("configurations", [id, config, caps]);
+				});
+				clear("sessions");
+				obj.sessions.forEach(function(session) {
+					var id = session.id;
+					var config = session.configuration;
+					delete session.id;
+					delete session.configuration;
+					
+					var createTerminateButton = function(td) {
+						var button = document.createElement("button");
+						button.appendChild(document.createTextNode("Terminate"));
+						button.onclick = function() {
+							var req = new XMLHttpRequest();
+							req.open("DELETE", "session/"+id, true);
+							req.onreadystatechange = function() {
+								if(req.readyState != 4) 
+									return;
+								if(req.status != 200)
+									return handleError("Problem deleting "+id+". Status: "+req.status);
+								location.reload(true);
+							}
+							req.send(null);
+						}
+						td.appendChild(button);
+					}
+					
+					addRow("sessions", [id, config, session, createTerminateButton]);
+				});
+				
+				document.getElementById("errors").style.display="none";
+				document.getElementById("results").style.display="";
+			}
+			function handleError(text) {
+				set("errors", "Error loading status: "+text);
+			
+				document.getElementById("errors").style.display="";
+				document.getElementById("results").style.display="none";
+			}
+		</script>
+		
+		<style type="text/css">
+			body {
+				background-color: #ffd;
+				font-family: sans-serif;
+			}
+			table {
+				width: 80%;
+				margin-left: 10%;
+				border: 1px solid #888;
+			}
+			th {
+				background-color: #ccc;
+			}
+			ul {
+				margin: 0;
+			}
+			td {
+				vertical-align: top;
+				padding: 0.5em;
+				background-color: #eee;
+				border: 1px solid #eee;
+			}
+			.alternate td {
+				background-color: #fff;
+			}
+			.nav {
+				float: right;
+			}
+			p {
+				margin-left: 10%;
+			}
+		</style>
+	</head>
+	<body onload="update('load');" onpageshow="update('pageshow');">
+		<noscript>
+			<p>There is a Twin RC running here.</p>
+			<p>JavaScript is required for the status viewer. View the <a href="status">raw status</a>.</p>
+		</noscript>
+		
+		<div class="nav"><a href="." onclick="update('click');return false;">Status</a> | <a href="ide">IDE</a></div>
+		<h1>Twin Status</h1>
+		
+		<p id="errors">Loading...</p>
+		<div id="results" style="display:none;">
+			<h2>Version</h2>
+			<p><span id="server.name"></span>&nbsp;<span id="server.version"></span></p>
+		
+			<h2>Configurations</h2>
+			<table>
+				<thead>
+					<th>ID</th>
+					<th>Properties</th>
+					<th>Capabilities</th>
+				</thead>
+				<tbody id="configurations">
+				</tbody>
+			</table>
+		
+			<h2>Sessions</h2>
+			<table>
+				<thead>
+					<th>ID</th>
+					<th>Configuration</th>
+					<th>Properties</th>
+					<th>Terminate</th>
+				</thead>
+				<tbody id="sessions">
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

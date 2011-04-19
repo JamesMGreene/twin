@@ -1,0 +1,31 @@
+<assembly>
+	<id>default</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<directory>src/main/contents</directory>
+			<outputDirectory>.</outputDirectory>
+		</fileSet>
+	</fileSets>
+	<dependencySets>
+		<!-- For entry points, remove the version from the filename, for easy configuration/scripting -->
+		<dependencySet>
+			<useProjectArtifact>false</useProjectArtifact>
+			<outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+			<includes>
+				<include>org.ebayopensource.twin:twin-rc</include>
+				<include>org.ebayopensource.twin:dotnet-logging</include>
+				<include>org.ebayopensource.twin:sharpclaws-api</include>
+			</includes>
+		</dependencySet>
+		<dependencySet>
+			<useProjectArtifact>false</useProjectArtifact>
+			<outputFileNameMapping>sharpclaws.exe</outputFileNameMapping>
+			<includes>
+				<include>org.ebayopensource.twin:sharpclaws-server</include>
+			</includes>
+		</dependencySet>
+	</dependencySets>
+</assembly>
