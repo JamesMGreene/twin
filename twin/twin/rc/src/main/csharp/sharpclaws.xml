@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<server port="4444" log-level="INFO">
+	<servlet context="/" class="Twin.TwinRC" assembly="twin-rc.dll">
+		<param name="app.notepad.name">notepad</param>
+		<param name="app.notepad.path">C:\windows\notepad.exe</param>
+	</servlet>
+</server>
