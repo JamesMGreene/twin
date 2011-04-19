@@ -7,7 +7,7 @@
 
 Make sure you have .NET framework installed ( version  3.0 or above ) [http://www.microsoft.com/net/download.aspx .NET framework download]
 
-Download TWIN remote control : twin-1.0.zip [http://code.google.com/p/twin/downloads/list here], unzip on the machine when your AUT is installed.. 
+Download TWIN remote control : twin-1.0.zip [http://code.google.com/p/twin/downloads/list here], unzip on the machine when your AUT is installed and run the sharpclaws executable.. 
 
 If you're using windows 7, you may have to unblock the files first. Right click on each file, properties. In the general tab, click the Unblock button at the bottom.
 
