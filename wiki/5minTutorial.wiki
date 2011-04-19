@@ -5,6 +5,8 @@
 
 = Setting up the server = 
 
+Install the last version of the .NET framework. [http://www.microsoft.com/net/download.aspx link]
+
 Download TWIN remote control, unzip on the machine when your AUT is installed..
 
 If you're using windows 7, you may have to unblock the files first. Right click on each file, properties. In the general tab, click the Unblock button at the bottom.
