@@ -26,7 +26,7 @@ Now that the server is running, you can now create your first test. The only lan
 
 Download twin-client-standalone-1.0.jar [http://code.google.com/p/twin/downloads/list here]
 Start a new java project and add the jar to the project classpath.
-Create a new class with a main ( updatin the URL you pass as a parameter to the application to match the IP of the machine where sharpclaws.exe has been launched ):
+Create a new class with a main ( updating the URL you pass as a parameter to the application to match the IP of the machine where sharpclaws.exe has been launched ):
 
 {{{
 import java.io.File;
