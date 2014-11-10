@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.ebayopensource.twin</groupId>
+  <artifactId>twin-project-aggregator</artifactId>
+  <version>1.0</version>
+  <name>twin-container</name>
+  <description>Twin and all subprojects</description>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>maven-templates/java-project</module>
+    <module>json</module>
+    <module>twin/client/java</module>
+    <module>twin/ide</module>
+    <module>packages/client/java</module>
+  </modules>
+
+	<!--
+	<profiles>
+    <profile>
+      <id>rc</id>
+      <activation>
+	<os><family>Windows</family></os>
+      </activation>
+	  <modules>
+	    <module>maven-templates/java-project</module>
+	    <module>maven-templates/dotnet-project</module>
+		<module>dotnet-logging</module>
+		<module>sharpclaws</module>
+		<module>twin/rc</module>
+		<module>packages/rc</module>
+	  </modules>
+    </profile>
+  </profiles>
+  -->
+</project>
